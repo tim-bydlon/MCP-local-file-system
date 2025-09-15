@@ -192,5 +192,8 @@ sandbox/
 !sandbox/welcome.txt
 !sandbox/test.txt
 
+# Claude Code settings
+.claude/
+
 # Logs
 *.log
