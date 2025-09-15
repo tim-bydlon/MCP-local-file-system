@@ -1,12 +1,16 @@
 {
   "manifest_version": "0.1",
   "name": "filesystem-server",
-  "display_name": "File System Server",
-  "description": "A safe file system MCP server with sandboxed operations",
+  "display_name": "Sandboxed File System Server",
   "version": "1.0.0",
+  "description": "A safe file system MCP server with sandboxed operations",
+  "long_description": "This extension provides secure file system operations within a sandboxed directory. It includes tools for reading, writing, listing, creating directories, and deleting files while ensuring all operations are contained within the configured sandbox path for security.",
   "author": {
-    "name": "Tim Bydlon"
+    "name": "Tim Bydlon",
+    "email": "tim@example.com"
   },
+  "keywords": ["filesystem", "files", "sandbox", "security", "python"],
+  "license": "MIT",
   "server": {
     "type": "python",
     "entry_point": "server/main.py",
@@ -20,6 +24,11 @@
       "env": {
         "PYTHONPATH": "${__dirname}/.venv/lib/python3.13/site-packages"
       }
+    }
+  },
+  "compatibility": {
+    "runtimes": {
+      "python": ">=3.8"
     }
   },
   "tools": [
