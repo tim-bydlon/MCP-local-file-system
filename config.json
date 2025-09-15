@@ -1,0 +1,9 @@
+{
+  "name": "filesystem-server",
+  "version": "1.0.0",
+  "description": "A simple MCP server for file system operations",
+  "sandbox_path": "./sandbox",
+  "max_file_size": 10485760,
+  "allowed_extensions": [".txt", ".json", ".md", ".py", ".js", ".html", ".css"],
+  "read_only": false
+}

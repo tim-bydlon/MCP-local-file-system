@@ -1,0 +1,20 @@
+{
+  "dxt_version": "0.1",
+  "name": "filesystem-server",
+  "description": "A safe file system MCP server with sandboxed operations",
+  "version": "1.0.0",
+  "author": {
+    "name": "Tim Bydlon"
+  },
+  "server": {
+    "type": "python",
+    "entry_point": "main.py",
+    "mcp_config": {
+      "command": "/usr/local/bin/python3.13",
+      "args": ["main.py"],
+      "env": {
+        "PYTHONPATH": ".venv/lib/python3.13/site-packages"
+      }
+    }
+  }
+}

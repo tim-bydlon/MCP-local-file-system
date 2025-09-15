@@ -1,0 +1,9 @@
+Welcome to the File System MCP Server!
+
+This is a test file to demonstrate the server capabilities.
+
+Key features:
+- Safe file operations within sandbox
+- Read, write, list, create, delete operations
+- File size and extension validation
+- Path validation to prevent directory traversal
