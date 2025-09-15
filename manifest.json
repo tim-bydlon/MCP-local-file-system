@@ -1,5 +1,5 @@
 {
-  "manifest_version": "0.1",
+  "dxt_version": "0.1",
   "name": "filesystem-server",
   "display_name": "Sandboxed File System Server",
   "version": "1.0.0",
@@ -15,7 +15,7 @@
     "type": "python",
     "entry_point": "server/main.py",
     "mcp_config": {
-      "command": "python",
+      "command": "${__dirname}/.venv/bin/python",
       "args": [
         "${__dirname}/server/main.py",
         "--sandbox=${user_config.sandbox_path}",

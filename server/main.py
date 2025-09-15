@@ -297,8 +297,9 @@ def parse_args():
     )
     parser.add_argument(
         "--read-only",
-        action="store_true",
-        help="Enable read-only mode"
+        type=lambda x: x.lower() == 'true',
+        default=False,
+        help="Enable read-only mode (true/false)"
     )
     return parser.parse_args()
 
@@ -307,11 +308,18 @@ async def main():
     """Main entry point."""
     args = parse_args()
 
+    # Handle template literal resolution
+    sandbox_path = args.sandbox
+    if sandbox_path.startswith("${__dirname}"):
+        # Get the directory where this script is located
+        script_dir = Path(__file__).parent.parent
+        sandbox_path = sandbox_path.replace("${__dirname}", str(script_dir))
+
     # Debug output
-    print(f"Starting server with sandbox: {args.sandbox}, read-only: {args.read_only}", file=sys.stderr)
+    print(f"Starting server with sandbox: {sandbox_path}, read-only: {args.read_only}", file=sys.stderr)
 
     server = FileSystemServer(
-        sandbox_path=args.sandbox,
+        sandbox_path=sandbox_path,
         read_only=args.read_only
     )
     await server.run()
