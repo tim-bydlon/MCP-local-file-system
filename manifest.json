@@ -1,6 +1,7 @@
 {
-  "dxt_version": "0.1",
+  "manifest_version": "0.1",
   "name": "filesystem-server",
+  "display_name": "File System Server",
   "description": "A safe file system MCP server with sandboxed operations",
   "version": "1.0.0",
   "author": {
@@ -8,13 +9,54 @@
   },
   "server": {
     "type": "python",
-    "entry_point": "main.py",
+    "entry_point": "server/main.py",
     "mcp_config": {
-      "command": "/usr/local/bin/python3.13",
-      "args": ["main.py"],
+      "command": "python",
+      "args": [
+        "${__dirname}/server/main.py",
+        "--sandbox=${user_config.sandbox_path}",
+        "--read-only=${user_config.read_only}"
+      ],
       "env": {
-        "PYTHONPATH": ".venv/lib/python3.13/site-packages"
+        "PYTHONPATH": "${__dirname}/.venv/lib/python3.13/site-packages"
       }
+    }
+  },
+  "tools": [
+    {
+      "name": "list_files",
+      "description": "List files and directories in a given path"
+    },
+    {
+      "name": "read_file",
+      "description": "Read the contents of a file"
+    },
+    {
+      "name": "write_file",
+      "description": "Write content to a file"
+    },
+    {
+      "name": "create_directory",
+      "description": "Create a new directory"
+    },
+    {
+      "name": "delete_file",
+      "description": "Delete a file or directory"
+    }
+  ],
+  "user_config": {
+    "sandbox_path": {
+      "type": "directory",
+      "title": "Sandbox Directory",
+      "description": "Directory for safe file operations",
+      "required": false,
+      "default": "${__dirname}/sandbox"
+    },
+    "read_only": {
+      "type": "boolean",
+      "title": "Read Only Mode",
+      "description": "Enable read-only mode to prevent writes",
+      "default": false
     }
   }
 }

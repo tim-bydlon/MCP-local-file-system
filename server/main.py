@@ -5,8 +5,10 @@ Provides safe file operations within a sandboxed directory.
 """
 
 import asyncio
+import argparse
 import json
 import os
+import sys
 from pathlib import Path
 from typing import Any, Dict, List, Optional
 
@@ -26,9 +28,28 @@ class Config(BaseModel):
 
 
 class FileSystemServer:
-    def __init__(self, config_path: str = "config.json"):
-        with open(config_path, 'r') as f:
-            config_data = json.load(f)
+    def __init__(self, sandbox_path: str = "./sandbox", read_only: bool = False, config_path: str = "config.json"):
+        # Load default config
+        config_file = Path(__file__).parent / config_path
+        if config_file.exists():
+            with open(config_file, 'r') as f:
+                config_data = json.load(f)
+        else:
+            # Default config if file doesn't exist
+            config_data = {
+                "name": "filesystem-server",
+                "version": "1.0.0",
+                "description": "A safe file system MCP server",
+                "sandbox_path": sandbox_path,
+                "max_file_size": 10485760,
+                "allowed_extensions": [".txt", ".json", ".md", ".py", ".js", ".html", ".css"],
+                "read_only": read_only
+            }
+
+        # Override with command line arguments
+        config_data["sandbox_path"] = sandbox_path
+        config_data["read_only"] = read_only
+
         self.config = Config(**config_data)
 
         # Create sandbox directory if it doesn't exist
@@ -266,9 +287,33 @@ class FileSystemServer:
             )
 
 
+def parse_args():
+    """Parse command line arguments."""
+    parser = argparse.ArgumentParser(description="File System MCP Server")
+    parser.add_argument(
+        "--sandbox",
+        default="./sandbox",
+        help="Sandbox directory path (default: ./sandbox)"
+    )
+    parser.add_argument(
+        "--read-only",
+        action="store_true",
+        help="Enable read-only mode"
+    )
+    return parser.parse_args()
+
+
 async def main():
     """Main entry point."""
-    server = FileSystemServer()
+    args = parse_args()
+
+    # Debug output
+    print(f"Starting server with sandbox: {args.sandbox}, read-only: {args.read_only}", file=sys.stderr)
+
+    server = FileSystemServer(
+        sandbox_path=args.sandbox,
+        read_only=args.read_only
+    )
     await server.run()
 
 
