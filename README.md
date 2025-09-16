@@ -130,10 +130,15 @@ MCP_dev/
 │   └── config.json       # Server configuration
 ├── sandbox/              # Default sandbox directory
 │   ├── welcome.txt       # Sample files
-│   └── test.txt
+│   ├── test.txt
+│   ├── docs/             # Sample directories
+│   ├── projects/
+│   └── test_dir/
 ├── .venv/                # Python virtual environment
+├── MCP_dev.mcpb          # Built MCPB extension package
 ├── manifest.json         # MCPB extension manifest
 ├── requirements.txt      # Python dependencies
+├── test_client.py        # Test client for development
 └── README.md            # This file
 ```
 
@@ -150,9 +155,9 @@ MCP_dev/
 - Async/await architecture for performance
 
 ### Dependencies
+See `requirements.txt` for the complete list of Python dependencies:
 - `mcp>=1.0.0` - Model Context Protocol SDK
-- `pydantic` - Data validation
-- `asyncio` - Asynchronous operations
+- `pydantic>=2.0.0` - Data validation and settings management
 
 ## Troubleshooting
 
@@ -204,7 +209,7 @@ Extension logs are available at:
 
 4. **Build MCPB package**
    ```bash
-   npx @anthropic-ai/mcpb pack .
+   mcpb pack
    ```
 
 ### Contributing
@@ -217,7 +222,7 @@ Extension logs are available at:
 
 ## License
 
-MIT License - see LICENSE file for details.
+MIT License
 
 ## Support
 
