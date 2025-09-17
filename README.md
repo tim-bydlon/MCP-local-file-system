@@ -47,10 +47,6 @@ The server provides 5 essential file system tools:
 
 ## Installation
 
-### Prerequisites
-- Claude Desktop application
-- macOS, Windows, or Linux
-
 ### Install the MCPB Extension
 
 1. **Download the Extension**
@@ -64,11 +60,6 @@ The server provides 5 essential file system tools:
    - Configure your preferences:
      - **Sandbox Directory**: Choose where files will be stored
      - **Read-Only Mode**: Enable to prevent write operations
-
-3. **Verify Installation**
-   - Restart Claude Desktop if prompted
-   - The extension should appear in your Extensions list
-   - Try asking Claude to list files or create a test file
 
 ### Configuration
 
@@ -154,11 +145,6 @@ MCP_dev/
 - Python 3.8+ compatible
 - Async/await architecture for performance
 
-### Dependencies
-See `requirements.txt` for the complete list of Python dependencies:
-- `mcp>=1.0.0` - Model Context Protocol SDK
-- `pydantic>=2.0.0` - Data validation and settings management
-
 ## Troubleshooting
 
 ### Common Issues
@@ -212,25 +198,5 @@ Extension logs are available at:
    mcpb pack
    ```
 
-### Contributing
-
-1. Fork the repository
-2. Create a feature branch
-3. Make your changes
-4. Test thoroughly
-5. Submit a pull request
-
-## License
-
-MIT License
-
-## Support
-
-For issues and questions:
-- Create an issue in this repository
-- Check the [MCP documentation](https://modelcontextprotocol.io/)
-- Review Claude Desktop extension guidelines
-
----
 
 **Note**: This extension provides powerful file system access. Always review and understand the permissions you're granting before installation.
